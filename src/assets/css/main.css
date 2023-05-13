@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 @import './base.css';
+@import 'boxicons/css/boxicons.min.css';
 
 /*========== Variables Dark theme ==========*/
 body.dark-theme {
