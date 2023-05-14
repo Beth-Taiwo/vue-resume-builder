@@ -121,6 +121,9 @@ body.scale-cv {
 .scale-cv .interests__container {
   column-gap: 2.5rem;
 }
+.scale-cv .home__button-movil {
+  display: none;
+}
 
 body {
   margin: 0 0 var(--header-height) 0;
