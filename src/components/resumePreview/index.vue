@@ -2,7 +2,7 @@
   <HeaderComponent />
   <main class="l-main bd-container">
     <!-- All elements within this div, is generated in PDF -->
-    <div class="resume" id="area-cv">
+    <div class="resume" id="area-cv" ref="areaCv">
       <div class="resume__left">
         <!--========== HOME ==========-->
         <section class="home" id="home">
@@ -12,9 +12,7 @@
               <h1 class="home__title">JOHN <b>DOE</b></h1>
               <h3 class="home__profession">Game Developer</h3>
               <div>
-                <a download="" href="assets/pdf/ResumeCv.pdf" class="home__button-movil"
-                  >Download</a
-                >
+                <a download="" class="home__button-movil" @click="downloadResume">Download</a>
               </div>
             </div>
 
@@ -33,7 +31,12 @@
           <!-- Theme change button -->
           <i class="bx bx-moon change-theme" title="Theme" id="theme-button"></i>
           <!-- Button to generate and download the pdf. Available for desktop. -->
-          <i class="bx bx-download generate-pdf" title="Generate PDF" id="resume-button"></i>
+          <i
+            class="bx bx-download generate-pdf"
+            title="Generate PDF"
+            id="resume-button"
+            @click="downloadResume"
+          ></i>
         </section>
 
         <!--========== SOCIAL ==========-->
@@ -293,6 +296,7 @@
 </template>
 
 <script>
+import html2pdf from 'html2pdf.js'
 import HeaderComponent from './Header.vue'
 
 export default {
@@ -315,6 +319,32 @@ export default {
       // When the scroll is higher than 560 viewport height, add the show-scroll class to the a tag with the scroll-top class
       if (window.pageYOffset >= 200) this.showScrollTopBtn = true
       else this.showScrollTopBtn = false
+    },
+    scaleCv() {
+      /*==================== REDUCE THE SIZE AND PRINT ON AN A4 SHEET ====================*/
+      document.body.classList.add('scale-cv')
+    },
+    /*==================== REMOVE THE SIZE WHEN THE CV IS DOWNLOADED ====================*/
+    removeScaleCv() {
+      document.body.classList.remove('scale-cv')
+    },
+    generateResume() {
+      const areaCv = this.$refs.areaCv
+      // Html2pdf options
+      let opt = {
+        margin: 0,
+        filename: 'myResume.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 4 },
+        jsPDF: { format: 'a4', orientation: 'portrait' }
+      }
+      return html2pdf().set(opt).from(areaCv)
+    },
+    downloadResume() {
+      this.scaleCv()
+      this.generateResume()
+        .save()
+        .then(() => this.removeScaleCv())
     }
   }
 }
