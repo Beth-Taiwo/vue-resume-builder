@@ -286,6 +286,10 @@
       </div>
     </div>
   </main>
+  <!--========== SCROLL TOP ==========-->
+  <a href="#" class="scrolltop" id="scroll-top" :class="{ 'show-scroll': showScrollTopBtn }">
+    <i class="bx bx-up-arrow-alt scrolltop__icon"></i>
+  </a>
 </template>
 
 <script>
@@ -293,7 +297,26 @@ import HeaderComponent from './Header.vue'
 
 export default {
   name: 'ResumePreview',
-  components: { HeaderComponent }
+  components: { HeaderComponent },
+  data() {
+    return {
+      showScrollTopBtn: false
+    }
+  },
+
+  mounted() {
+    window.addEventListener('scroll', this.scrollTop)
+  },
+  unmounted() {
+    window.removeEventListener('scroll', this.scrollTop)
+  },
+  methods: {
+    scrollTop() {
+      // When the scroll is higher than 560 viewport height, add the show-scroll class to the a tag with the scroll-top class
+      if (window.pageYOffset >= 200) this.showScrollTopBtn = true
+      else this.showScrollTopBtn = false
+    }
+  }
 }
 </script>
 
