@@ -311,22 +311,44 @@ export default {
 
   mounted() {
     window.addEventListener('scroll', this.scrollTop)
+    window.addEventListener('scroll', this.scrollActive)
   },
   unmounted() {
     window.removeEventListener('scroll', this.scrollTop)
+    window.removeEventListener('scroll', this.scrollActive)
   },
   methods: {
+    scrollActive() {
+      const scrollY = window.pageYOffset
+      const sections = document.querySelectorAll('section[id]')
+
+      sections.forEach((current) => {
+        const sectionHeight = current.offsetHeight
+        const sectionTop = current.offsetTop - 50
+        const sectionId = current.getAttribute('id')
+
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+          document
+            .querySelector('.nav__menu a[href*=' + sectionId + ']')
+            .classList.add('active-link')
+        } else {
+          document
+            .querySelector('.nav__menu a[href*=' + sectionId + ']')
+            .classList.remove('active-link')
+        }
+      })
+    },
     scrollTop() {
-      // When the scroll is higher than 560 viewport height, add the show-scroll class to the a tag with the scroll-top class
+      // When the scroll is higher than 200 viewport height, add the show-scroll class to the <a> tag with the scroll-top class
       if (window.pageYOffset >= 200) this.showScrollTopBtn = true
       else this.showScrollTopBtn = false
     },
     scaleCv() {
-      /*==================== REDUCE THE SIZE AND PRINT ON AN A4 SHEET ====================*/
+      /* REDUCE THE SIZE AND PRINT ON AN A4 SHEET */
       document.body.classList.add('scale-cv')
     },
-    /*==================== REMOVE THE SIZE WHEN THE CV IS DOWNLOADED ====================*/
     removeScaleCv() {
+      /* REMOVE THE SIZE WHEN THE CV IS DOWNLOADED */
       document.body.classList.remove('scale-cv')
     },
     generateResume() {
