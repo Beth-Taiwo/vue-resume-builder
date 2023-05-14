@@ -29,7 +29,7 @@
             </div>
           </div>
           <!-- Theme change button -->
-          <i class="bx bx-moon change-theme" title="Theme" id="theme-button"></i>
+          <ThemeButton />
           <!-- Button to generate and download the pdf. Available for desktop. -->
           <i
             class="bx bx-download generate-pdf"
@@ -298,10 +298,11 @@
 <script>
 import html2pdf from 'html2pdf.js'
 import HeaderComponent from './Header.vue'
+import ThemeButton from './ThemeButton.vue'
 
 export default {
   name: 'ResumePreview',
-  components: { HeaderComponent },
+  components: { HeaderComponent, ThemeButton },
   data() {
     return {
       showScrollTopBtn: false
