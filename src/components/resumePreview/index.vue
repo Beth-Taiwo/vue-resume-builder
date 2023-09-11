@@ -303,9 +303,10 @@ import ThemeButton from './ThemeButton.vue'
 export default {
   name: 'ResumePreview',
   components: { HeaderComponent, ThemeButton },
+  inject:['userData'],
   data() {
     return {
-      showScrollTopBtn: false
+      showScrollTopBtn: false,
     }
   },
 
