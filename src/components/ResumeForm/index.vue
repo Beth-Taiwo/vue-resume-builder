@@ -145,7 +145,7 @@
 
               <div class="row-separator repeater">
                 <div class="repeater" data-repeater-list="group-c">
-                  <div v-for="(item,index) in educationItems" :key="index" data-repeater-item>
+                  <div v-for="(item, index) in educationItems" :key="index" data-repeater-item>
                     <div class="cv-form-row cv-form-row-experience">
                       <div class="cols-3">
                         <div class="form-elem">
@@ -205,7 +205,8 @@
                         </div>
                         <div class="form-elem">
                           <label for="" class="form-label">Description</label>
-                          <input v-model="item.edu_description"
+                          <input
+                            v-model="item.edu_description"
                             name="edu_description"
                             type="text"
                             class="form-control edu_description"
@@ -214,7 +215,13 @@
                         </div>
                       </div>
 
-                      <button v-if="index >= 1" data-repeater-delete type="button" class="repeater-remove-btn" @click="removeItem(index)">
+                      <button
+                        v-if="index >= 1"
+                        data-repeater-delete
+                        type="button"
+                        class="repeater-remove-btn"
+                        @click="removeEducationItem(index)"
+                      >
                         -
                       </button>
                     </div>
@@ -225,7 +232,7 @@
                   data-repeater-create
                   value="Add"
                   class="repeater-add-btn"
-                  @click="addItem"
+                  @click="addEducationItems"
                 >
                   +
                 </button>
@@ -239,17 +246,16 @@
 
               <div class="row-separator repeater">
                 <div class="repeater" data-repeater-list="group-a">
-                  <div data-repeater-item>
+                  <div v-for="(item, index) in achievements" :key="index" data-repeater-item>
                     <div class="cv-form-row cv-form-row-achievement">
                       <div class="cols-2">
                         <div class="form-elem">
                           <label for="" class="form-label">Title</label>
                           <input
+                            v-model="item.achieve_title"
                             name="achieve_title"
                             type="text"
                             class="form-control achieve_title"
-                            id=""
-                            onkeyup="generateCV()"
                             placeholder="e.g. johndoe@gmail.com"
                           />
                           <span class="form-text"></span>
@@ -257,23 +263,34 @@
                         <div class="form-elem">
                           <label for="" class="form-label">Description</label>
                           <input
+                            v-model="item.achieve_description"
                             name="achieve_description"
                             type="text"
                             class="form-control achieve_description"
-                            id=""
-                            onkeyup="generateCV()"
                             placeholder="e.g. johndoe@gmail.com"
                           />
                           <span class="form-text"></span>
                         </div>
                       </div>
-                      <button data-repeater-delete type="button" class="repeater-remove-btn">
+                      <button
+                        v-if="index >= 1"
+                        data-repeater-delete
+                        type="button"
+                        class="repeater-remove-btn"
+                        @click="removeAchievementsItem(index)"
+                      >
                         -
                       </button>
                     </div>
                   </div>
                 </div>
-                <button type="button" data-repeater-create value="Add" class="repeater-add-btn">
+                <button
+                  type="button"
+                  data-repeater-create
+                  value="Add"
+                  class="repeater-add-btn"
+                  @click="addAchievementsItems"
+                >
                   +
                 </button>
               </div>
@@ -286,39 +303,36 @@
 
               <div class="row-separator repeater">
                 <div class="repeater" data-repeater-list="group-b">
-                  <div data-repeater-item>
+                  <div v-for="(item, index) in experiences" :key="index" data-repeater-item>
                     <div class="cv-form-row cv-form-row-experience">
                       <div class="cols-3">
                         <div class="form-elem">
                           <label for="" class="form-label">Title</label>
                           <input
+                            v-model="item.exp_title"
                             name="exp_title"
                             type="text"
                             class="form-control exp_title"
-                            id=""
-                            onkeyup="generateCV()"
                           />
                           <span class="form-text"></span>
                         </div>
                         <div class="form-elem">
                           <label for="" class="form-label">Company / Organization</label>
                           <input
+                            v-model="item.exp_organization"
                             name="exp_organization"
                             type="text"
                             class="form-control exp_organization"
-                            id=""
-                            onkeyup="generateCV()"
                           />
                           <span class="form-text"></span>
                         </div>
                         <div class="form-elem">
                           <label for="" class="form-label">Location</label>
                           <input
+                            v-model="item.exp_location"
                             name="exp_location"
                             type="text"
                             class="form-control exp_location"
-                            id=""
-                            onkeyup="generateCV()"
                           />
                           <span class="form-text"></span>
                         </div>
@@ -328,45 +342,55 @@
                         <div class="form-elem">
                           <label for="" class="form-label">Start Date</label>
                           <input
+                            v-model="item.exp_start_date"
                             name="exp_start_date"
                             type="date"
+                            :max="minDate"
                             class="form-control exp_start_date"
-                            id=""
-                            onkeyup="generateCV()"
                           />
                           <span class="form-text"></span>
                         </div>
                         <div class="form-elem">
                           <label for="" class="form-label">End Date</label>
                           <input
+                            v-model="item.exp_end_date"
                             name="exp_end_date"
                             type="date"
                             class="form-control exp_end_date"
-                            id=""
-                            onkeyup="generateCV()"
                           />
                           <span class="form-text"></span>
                         </div>
                         <div class="form-elem">
                           <label for="" class="form-label">Description</label>
                           <input
+                            v-model="item.exp_description"
                             name="exp_description"
                             type="text"
                             class="form-control exp_description"
-                            id=""
-                            onkeyup="generateCV()"
                           />
                           <span class="form-text"></span>
                         </div>
                       </div>
 
-                      <button data-repeater-delete type="button" class="repeater-remove-btn">
+                      <button
+                        v-if="index >= 1"
+                        data-repeater-delete
+                        type="button"
+                        class="repeater-remove-btn"
+                        @click="removeExperiencesItem(index)"
+                      >
                         -
                       </button>
                     </div>
                   </div>
                 </div>
-                <button type="button" data-repeater-create value="Add" class="repeater-add-btn">
+                <button
+                  type="button"
+                  data-repeater-create
+                  value="Add"
+                  class="repeater-add-btn"
+                  @click="addExperiencesItems"
+                >
                   +
                 </button>
               </div>
@@ -379,50 +403,59 @@
 
               <div class="row-separator repeater">
                 <div class="repeater" data-repeater-list="group-d">
-                  <div data-repeater-item>
+                  <div v-for="(item, index) in projects" :key="index" data-repeater-item>
                     <div class="cv-form-row cv-form-row-experience">
                       <div class="cols-3">
                         <div class="form-elem">
                           <label for="" class="form-label">Project Name</label>
                           <input
+                            v-model="item.proj_title"
                             name="proj_title"
                             type="text"
                             class="form-control proj_title"
-                            id=""
-                            onkeyup="generateCV()"
                           />
                           <span class="form-text"></span>
                         </div>
                         <div class="form-elem">
                           <label for="" class="form-label">Project link</label>
                           <input
+                            v-model="item.proj_link"
                             name="proj_link"
                             type="text"
                             class="form-control proj_link"
-                            id=""
-                            onkeyup="generateCV()"
                           />
                           <span class="form-text"></span>
                         </div>
                         <div class="form-elem">
                           <label for="" class="form-label">Description</label>
                           <input
+                            v-model="item.proj_description"
                             name="proj_description"
                             type="text"
                             class="form-control proj_description"
-                            id=""
-                            onkeyup="generateCV()"
                           />
                           <span class="form-text"></span>
                         </div>
                       </div>
-                      <button data-repeater-delete type="button" class="repeater-remove-btn">
+                      <button
+                        v-if="index >= 1"
+                        data-repeater-delete
+                        type="button"
+                        class="repeater-remove-btn"
+                        @click="removeProjectsItem(index)"
+                      >
                         -
                       </button>
                     </div>
                   </div>
                 </div>
-                <button type="button" data-repeater-create value="Add" class="repeater-add-btn">
+                <button
+                  type="button"
+                  data-repeater-create
+                  value="Add"
+                  class="repeater-add-btn"
+                  @click="addProjectItems"
+                >
                   +
                 </button>
               </div>
@@ -435,27 +468,38 @@
 
               <div class="row-separator repeater">
                 <div class="repeater" data-repeater-list="group-e">
-                  <div data-repeater-item>
+                  <div v-for="(item, index) in skills" :key="index" data-repeater-item>
                     <div class="cv-form-row cv-form-row-skills">
                       <div class="form-elem">
                         <label for="" class="form-label">Skill</label>
                         <input
+                          v-model="item.skill"
                           name="skill"
                           type="text"
                           class="form-control skill"
-                          id=""
-                          onkeyup="generateCV()"
                         />
                         <span class="form-text"></span>
                       </div>
 
-                      <button data-repeater-delete type="button" class="repeater-remove-btn">
+                      <button
+                        v-if="index >= 1"
+                        data-repeater-delete
+                        type="button"
+                        class="repeater-remove-btn"
+                        @click="removeSkillItem(index)"
+                      >
                         -
                       </button>
                     </div>
                   </div>
                 </div>
-                <button type="button" data-repeater-create value="Add" class="repeater-add-btn">
+                <button
+                  type="button"
+                  data-repeater-create
+                  value="Add"
+                  class="repeater-add-btn"
+                  @click="addSkillItems"
+                >
                   +
                 </button>
               </div>
@@ -556,7 +600,6 @@
       </div>
     </section>
 
-   
     <!-- <section class = "print-btn-sc">
             <div class = "container">
                 <button type = "button" class = "print-btn btn btn-primary" onclick="printCV()">Print CV</button>
@@ -599,15 +642,31 @@ export default {
       email: '',
       phoneno: '',
       summary: '',
-      edu_school: '',
-      edu_degree: '',
-      edu_city: '',
-      edu_start_date: '',
-      edu_description:'',
       minDate: '',
       edu_graduation_date: '',
-      items: [{ textInput: '', edu_school: '', edu_degree: '', edu_city: '', edu_start_date: '' }],
-      educationItems: [{ textInput: '', edu_school: '', edu_degree: '', edu_city: '', edu_start_date: '',edu_description:'' }],
+      educationItems: [
+        {
+          edu_school: '',
+          edu_degree: '',
+          edu_city: '',
+          edu_start_date: '',
+          edu_graduation_date: '',
+          edu_description: ''
+        }
+      ],
+      achievements: [{ achieve_title: '', achieve_description: '' }],
+      experiences: [
+        {
+          exp_title: '',
+          exp_organization: '',
+          exp_location: '',
+          exp_start_date: '',
+          exp_end_date: '',
+          exp_description: ''
+        }
+      ],
+      projects: [{ proj_title: '', proj_link: '', proj_description: '' }],
+      skills: [{ skill: '' }]
     }
   },
   computed: {
@@ -622,6 +681,10 @@ export default {
         phoneno: this.phoneno,
         summary: this.summary,
         educationItems: this.educationItems,
+        achievements: this.achievements,
+        experiences: this.experiences,
+        projects: this.projects,
+        skills: this.skills
       }
     }
   },
@@ -631,11 +694,48 @@ export default {
     this.minDate = now.toISOString().substring(0, 10)
   },
   methods: {
-    addItem() {
-      this.educationItems.push({ edu_school: '', edu_degree: '', edu_city: '', edu_start_date: '',edu_description:'' })
+    addEducationItems() {
+      this.educationItems.push({
+        edu_school: '',
+        edu_degree: '',
+        edu_city: '',
+        edu_start_date: '',
+        edu_description: ''
+      })
     },
-    removeItem(index) {
+    removeEducationItem(index) {
       this.educationItems.splice(index, 1)
+    },
+    addAchievementsItems() {
+      this.achievements.push({ achieve_title: '', achieve_description: '' })
+    },
+    removeAchievementsItem(index) {
+      this.achievements.splice(index, 1)
+    },
+    addExperiencesItems() {
+      this.experiences.push({
+        exp_title: '',
+        exp_organization: '',
+        exp_location: '',
+        exp_start_date: '',
+        exp_end_date: '',
+        exp_description: ''
+      })
+    },
+    removeExperiencesItem(index) {
+      this.experiences.splice(index, 1)
+    },
+    addProjectItems() {
+      this.projects.push({ proj_title: '', proj_link: '', proj_description: '' })
+    },
+    removeProjectsItem(index) {
+      this.projects.splice(index, 1)
+    },
+    addSkillItems() {
+      this.skills.push({ skill: '' })
+    },
+    removeSkillItem(index) {
+      this.skills.splice(index, 1)
     }
   }
 }
