@@ -135,6 +135,42 @@
                     <span class="form-text"></span>
                   </div>
                 </div>
+
+                <div class="cols-3">
+                  <div class="form-elem">
+                    <label for="" class="form-label">Linkedin</label>
+                    <input
+                      v-model="linkedin"
+                      name="linkedin"
+                      type="url"
+                      class="form-control linkedin"
+                      placeholder="e.g. https://www.linkedin.com/username/"
+                    />
+                    <span class="form-text"></span>
+                  </div>
+                  <div class="form-elem">
+                    <label for="" class="form-label">Github</label>
+                    <input
+                      v-model="github"
+                      name="github"
+                      type="url"
+                      class="form-control github"
+                      placeholder="e.g. https://github.com/username/"
+                    />
+                    <span class="form-text"></span>
+                  </div>
+                  <div class="form-elem">
+                    <label for="" class="form-label">Website</label>
+                    <input
+                      v-model="website"
+                      name="website"
+                      type="url"
+                      class="form-control website"
+                      placeholder="e.g. https://mywebsite.com"
+                    />
+                    <span class="form-text"></span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -600,19 +636,6 @@
       </div>
     </section>
 
-    <!-- <section class = "print-btn-sc">
-            <div class = "container">
-                <button type = "button" class = "print-btn btn btn-primary" onclick="printCV()">Print CV</button>
-            </div>
-        </section> -->
-
-    <!-- jquery cdn -->
-    <!-- <script src="https://code.jquery.com/jquery-3.6.4.js"
-        integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script> -->
-    <!-- jquery repeater cdn -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.js"
-        integrity="sha512-bZAXvpVfp1+9AUHQzekEZaXclsgSlAeEnMJ6LfFAvjqYUVZfcuVXeQoN5LhD7Uw0Jy4NCY9q3kbdEXbwhZUmUQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
     <!-- custom js -->
     <!-- <script src="assets/js/script.js"></script> -->
     <!-- app js -->
@@ -642,6 +665,9 @@ export default {
       email: '',
       phoneno: '',
       summary: '',
+      linkedin: '',
+      github: '',
+      website: '',
       minDate: '',
       edu_graduation_date: '',
       educationItems: [
@@ -680,6 +706,9 @@ export default {
         email: this.email,
         phoneno: this.phoneno,
         summary: this.summary,
+        linkedin: this.linkedin,
+        github: this.github,
+        website: this.website,
         educationItems: this.educationItems,
         achievements: this.achievements,
         experiences: this.experiences,
@@ -741,53 +770,5 @@ export default {
 }
 </script>
 
-<style scoped>
-.build-resume {
-  font-size: 10px;
-}
-@media screen and (min-width: 768px) {
-  .cols-3 {
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 2rem;
-  }
-  .cols-2 {
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 2rem;
-  }
-}
-
-@media screen and (min-width: 992px) {
-  .cv-form-row {
-    padding: 3rem 3rem 0rem 3rem;
-  }
-  .cols-3 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-/* media queries */
-@media screen and (min-width: 768px) {
-  .section-two .section-items {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media screen and (min-width: 992px) {
-  .section-one-content {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 3rem;
-  }
-  .section-one-r {
-    text-align: left;
-  }
-  .section-two .section-items {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .section-two .section-item {
-    text-align: left;
-  }
-  .section-two .section-item-icon img {
-    margin-left: 0;
-  }
-}
+<style>
 </style>

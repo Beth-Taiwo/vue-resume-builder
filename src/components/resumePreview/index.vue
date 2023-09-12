@@ -9,7 +9,7 @@
           <div class="home__container section bd-grid">
             <div class="home__data bd-grid">
               <img src="/src/assets/img/chilling.jpeg" alt="" class="home__img" />
-              <h1 class="home__title">JOHN <b>DOE</b></h1>
+              <h1 class="home__title">{{ fullName.trim() ? fullName : 'John Doe' }}</h1>
               <h3 class="home__profession">Game Developer</h3>
               <div>
                 <a download="" class="home__button-movil" @click="downloadResume">Download</a>
@@ -17,15 +17,18 @@
             </div>
 
             <div class="home__address bd-grid">
-              <span class="home__information">
-                <i class="bx bx-map home__icon"></i>Accra Ghana
-              </span>
-              <span class="home__information">
-                <i class="bx bx-envelope home__icon"></i>user@emil.com
-              </span>
-              <span class="home__information">
-                <i class="bx bx-phone home__icon"></i>123-456-789
-              </span>
+              <p class="home__information">
+                <i class="bx bx-map home__icon"></i>
+                <span>{{ userData.address ? userData.address : 'Accra Ghana' }}</span>
+              </p>
+              <p class="home__information">
+                <i class="bx bx-envelope home__icon"></i>
+                <span>{{ userData.email ? userData.email : 'user@email.com' }}</span>
+              </p>
+              <p class="home__information">
+                <i class="bx bx-phone home__icon"></i>
+                <span>{{ userData.phoneno ? userData.phoneno : '123-456-789' }}</span>
+              </p>
             </div>
           </div>
           <!-- Theme change button -->
@@ -44,13 +47,16 @@
           <h2 class="section-title">SOCIAL</h2>
           <div class="social__container bd-grid">
             <a href="https://www.linkedin.com/" target="_blank" class="social__link">
-              <i class="bx bxl-linkedin-square social__icon"></i>@johndoe
+              <i class="bx bxl-linkedin-square social__icon"></i>
+              <span style="white-space: normal;word-break: break-word;">{{userData.linkedin ? userData.linkedin: 'https://www.linkedin.com/username/'}}</span>
             </a>
             <a href="https://github.com/" target="_blank" class="social__link">
-              <i class="bx bxl-github social__icon"></i>@johndoe
+              <i class="bx bxl-github social__icon"></i>
+              <span style="white-space: normal;word-break: break-word;">{{userData.github ? userData.github :'https://github.com/username/'}}</span>
             </a>
             <a href="https://twitter.com/" target="_blank" class="social__link">
-              <i class="bx bxl-twitter social__icon"></i>@johndoe
+              <i class='bx bx-at social__icon'></i>
+              <span style="white-space: normal;word-break: break-word;">{{userData.website ? userData.website :'https://mywebsite.com'}}</span>
             </a>
           </div>
         </section>
@@ -58,11 +64,12 @@
         <!--========== PROFILE ==========-->
         <section class="profile section" id="profile">
           <h2 class="section-title">Profile</h2>
-          <p class="profile__description">
+          <p v-if="!userData.summary" class="profile__description">
             I am a person, responsible with their work during working hours. Finish various
             technical and higher studies at large universities. I have several years of experience
             and achievements in the labor field.
           </p>
+          <p v-else>{{userData.summary}}</p>
         </section>
 
         <!--========== EDUCATION ==========-->
@@ -303,13 +310,17 @@ import ThemeButton from './ThemeButton.vue'
 export default {
   name: 'ResumePreview',
   components: { HeaderComponent, ThemeButton },
-  inject:['userData'],
+  inject: ['userData'],
   data() {
     return {
-      showScrollTopBtn: false,
+      showScrollTopBtn: false
     }
   },
-
+  computed: {
+    fullName() {
+      return `${this.userData.firstName} ${this.userData.middleName} ${this.userData.lastName}`
+    }
+  },
   mounted() {
     window.addEventListener('scroll', this.scrollTop)
     window.addEventListener('scroll', this.scrollActive)
