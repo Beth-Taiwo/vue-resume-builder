@@ -26,14 +26,11 @@ button {
 } */
 
 
-/* text colors */
-/* .text-blue{color: var(--clr-blue);}
-.text-blue-mid{color: var(--clr-blue-mid);}
-.text-blue-dark{color: var(--clr-blue-dark);}
-.text-bright{color: var(--clr-bright);}
-.text-dark{color: var(--clr-dark);}
-.text-grey{color: var(--clr-grey);}
-.text-white{color: var(--clr-white);} */
+.sticky-container {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
 
 /* backgrounds */
 .bg-blue {
