@@ -7,7 +7,7 @@
         <!--========== HOME ==========-->
         <section class="home" id="home">
           <div class="home__container section bd-grid">
-            <div class="home__data bd-grid" style="border: 1px solid red">
+            <div class="home__data bd-grid">
               <img
                 v-if="userData.avatar"
                 :src="userData.avatar"
@@ -117,9 +117,9 @@
                       : 'MASTER OF DESIGN'
                   }}
                 </p>
-                <span class="education__studies">{{
+                <!-- <span class="education__studies">{{
                   item.edu_city ? item.edu_city : 'University of Studies'
-                }}</span>
+                }}</span> -->
                 <span class="education__year">{{
                   item.edu_start_date
                     ? formatString(item.edu_start_date, item.edu_graduation_date)
@@ -127,19 +127,6 @@
                 }}</span>
               </div>
             </div>
-          </div>
-        </section>
-
-        <!--========== SKILLS  ==========-->
-        <section class="skills section" id="skills">
-          <h2 class="section-title">Skills</h2>
-
-          <div class="skills__content bd-grid">
-            <ul v-for="(item, index) in userData.skills" :key="index" class="skills__data">
-              <li class="skills__name">
-                <span class="skills__circle"></span>{{ item.skill ? item.skill : 'HTML 5' }}
-              </li>
-            </ul>
           </div>
         </section>
       </div>
@@ -185,6 +172,7 @@
                   }}
                 </p>
               </div>
+             
             </div>
           </div>
         </section>
@@ -194,7 +182,13 @@
           <h2 class="section-title">Certificates</h2>
 
           <div class="certificate__container bd-grid">
-            <div class="certificate__content">
+            <div
+              v-if="
+                !userData.achievements[0].achieve_description ||
+                !userData.achievements[0].achieve_title
+              "
+              class="certificate__content"
+            >
               <h3 class="certificate__title">Certified for complaince in the work area (2012)</h3>
               <p class="certificate__description">
                 For meeting the expectations of leading the team to work the specified tasks in the
@@ -202,29 +196,71 @@
               </p>
             </div>
 
-            <div class="certificate__content">
-              <h3 class="certificate__title">Certificate of attendance on computer technology.</h3>
+            <div
+              v-for="(item, index) in userData.achievements"
+              :key="index"
+              class="certificate__content"
+            >
+              <h3 class="certificate__title">{{ item.achieve_title }}</h3>
               <p class="certificate__description">
-                For meeting the expectations of leading the team to work the specified tasks in the
-                labor field.
-              </p>
-            </div>
-
-            <div class="certificate__content">
-              <h3 class="certificate__title">
-                Achievement medal for productivity excellence during the year (2019)
-              </h3>
-              <p class="certificate__description">
-                For meeting the expectations of leading the team to work the specified tasks in the
-                labor field.
+                {{ item.achieve_description }}
               </p>
             </div>
           </div>
         </section>
 
+        <!--========== PROJECTS ==========-->
+        <section class="certificate section" id="projects">
+          <h2 class="section-title">Projects</h2>
+
+          <div class="project__container bd-grid">
+            <div
+              v-if="
+                !userData.projects[0].proj_title
+              "
+              class="project__content"
+            >
+              <h3 class="project__title">Automated car parking system</h3>
+              <p class="project__description">
+                For meeting the expectations of leading the team to work the specified tasks in the
+                labor field.
+              </p>
+            </div>
+
+            <div
+              v-for="(item, index) in userData.projects"
+              :key="index"
+              class="project__content"
+            >
+              <h3 class="project__title">{{ item.proj_title }}</h3>
+              <p>
+                {{ item.proj_description }}
+              </p>
+              <p class="project__description">
+                <a href="item.proj_link" class="social__link">{{item.proj_link}}</a>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!--========== SKILLS  ==========-->
+        <section class="skills section" id="skills">
+          <h2 class="section-title">Skills</h2>
+
+          <div class="skills__content bd-grid">
+            <ul v-if="!userData.skills[0].skill" class="skills__data">
+              <li class="skills__name"><span class="skills__circle"></span>HTML 5</li>
+            </ul>
+            <ul v-for="(item, index) in userData.skills" :key="index" class="skills__data">
+              <li class="skills__name">
+                <span v-if="item.skill" class="skills__circle"></span>{{ item.skill }}
+              </li>
+            </ul>
+          </div>
+        </section>
 
         <!--========== LANGUAGES ==========-->
-        <section class="languages section">
+        <!-- <section class="languages section">
           <h2 class="section-title">languages</h2>
 
           <div class="languages__container">
@@ -234,35 +270,7 @@
               <li class="languages__name"><span class="languages__circle"></span>French</li>
             </ul>
           </div>
-        </section>
-
-        <!--========== INTERESTS ==========-->
-        <section class="interests section">
-          <h2 class="section-title">Interests</h2>
-
-          <div class="interests__container bd-grid">
-            <div class="interests__content">
-              <i class="bx bx-headphone interests__icon"></i>
-              <span class="interests__name">Music</span>
-            </div>
-            <div class="interests__content">
-              <i class="bx bxs-plane-alt interests__icon"></i>
-              <span class="interests__name">Travel</span>
-            </div>
-            <div class="interests__content">
-              <i class="bx bx-swim interests__icon"></i>
-              <span class="interests__name">Pools</span>
-            </div>
-            <div class="interests__content">
-              <i class="bx bx-dumbbell interests__icon"></i>
-              <span class="interests__name">Exercise</span>
-            </div>
-            <div class="interests__content">
-              <i class="bx bx-book-open interests__icon"></i>
-              <span class="interests__name">Book</span>
-            </div>
-          </div>
-        </section>
+        </section> -->
       </div>
     </div>
   </main>

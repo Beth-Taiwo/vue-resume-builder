@@ -1,6 +1,6 @@
 <template>
-  <div class="build-resume">
-    <nav class="navbar bg-white">
+  <div>
+    <nav class="navbar bg-white sticky-container">
       <div class="container">
         <div class="navbar-content">
           <div class="brand-and-toggler">
@@ -11,12 +11,17 @@
           </div>
         </div>
       </div>
+      <div>
+        <button class="preview-icon">
+          <img src="/src/assets/img/icons8-eye.png" alt="eye_image" class="navbar-brand-icon" />
+        </button>
+      </div>
     </nav>
 
     <section id="about-sc" class="">
       <div class="container">
         <!-- form -->
-        <div class="about-cnt">
+        <div class="build-resume">
           <form action="" class="cv-form" id="cv-form">
             <div class="cv-form-blk">
               <div class="cv-form-row-title">
@@ -548,25 +553,12 @@
         </div>
         <!-- resume preview -->
         <div class="cv-form-blk">
-          <div class="sticky-container">
+          <div class="sticky-container sticky-resume">
             <PreviewResume />
           </div>
         </div>
       </div>
     </section>
-
-    <section class="preview-btn-sc">
-      <div class="container">
-        <button type="button" class="print-btn btn btn-primary" onclick="previewCV()">
-          Preview
-        </button>
-      </div>
-    </section>
-
-    <!-- custom js -->
-    <!-- <script src="assets/js/script.js"></script> -->
-    <!-- app js -->
-    <!-- <script src="assets/js/app.js"></script> -->
   </div>
 </template>
 
