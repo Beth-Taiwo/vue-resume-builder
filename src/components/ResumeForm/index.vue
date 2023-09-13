@@ -200,6 +200,7 @@
                             v-model="item.edu_degree"
                             name="edu_degree"
                             type="text"
+                            placeholder="Bachelor's degree"
                             class="form-control edu_degree"
                           />
                           <span class="form-text"></span>
@@ -210,6 +211,7 @@
                             v-model="item.edu_city"
                             name="edu_city"
                             type="text"
+                            placeholder="Accra"
                             class="form-control edu_city"
                           />
                           <span class="form-text"></span>
@@ -245,6 +247,7 @@
                             v-model="item.edu_description"
                             name="edu_description"
                             type="text"
+                            placeholder="History"
                             class="form-control edu_description"
                           />
                           <span class="form-text"></span>
