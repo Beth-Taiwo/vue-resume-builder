@@ -100,7 +100,9 @@ body.scale-cv {
 }
 .scale-cv .education__container,
 .scale-cv .experience__company,
-.scale-cv .certificate__container {
+.scale-cv .certificate__container,
+.scale-cv .project__container
+ {
   gap: 1rem;
 }
 .scale-cv .education__time,
@@ -387,7 +389,8 @@ img {
 }
 .education__year,
 .experience__description,
-.certificate__description {
+.certificate__description,
+.project__description {
   font-size: var(--smaller-font-size);
 }
 
@@ -416,13 +419,12 @@ img {
   margin-right: 0.75rem;
 }
 
-/*========== CERTIFICATES ==========*/
-.certificate__title {
+/*========== CERTIFICATES AND PROJECTS ==========*/
+.certificate__title .project__title  {
   font-size: var(--h3-font-size);
-}
-.certificate__title {
   margin-bottom: var(--mb-1);
 }
+
 
 /*========== REFERENCES ==========*/
 .references__content {
