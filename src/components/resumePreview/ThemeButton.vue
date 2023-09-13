@@ -1,7 +1,7 @@
 <template>
   <i
     class="bx change-theme"
-    :class="{ 'bx-sun': currentTheme === 'light', ' bx-moon': currentTheme !== 'light' }"
+    :class="{ 'bx-moon': currentTheme === 'light', ' bx-sun': currentTheme !== 'light' }"
     title="Theme"
     id="theme-button"
     ref="themeButton"
@@ -31,7 +31,7 @@ export default {
       this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light'
 
       const themeButton = this.$refs.themeButton
-      themeButton.classList.toggle('bx-sun')
+      themeButton.classList.toggle('bx-moon')
     },
     persistCurrentTheme() {
       localStorage.setItem('selected-theme', this.currentTheme)
