@@ -68,12 +68,13 @@
                   <div class="form-elem">
                     <label for="" class="form-label">Your Image</label>
                     <input
+                    ref="imgUploadInputRef"
                       name="image"
                       type="file"
                       class="form-control image"
                       id=""
                       accept="image/*"
-                      onchange="previewImage()"
+                      @change="previewImage"
                     />
                   </div>
                   <div class="form-elem">
@@ -660,6 +661,7 @@ export default {
   },
   data() {
     return {
+      avatar:null,
       firstName: '',
       middleName: '',
       lastName: '',
@@ -701,6 +703,7 @@ export default {
   computed: {
     userData() {
       return {
+        avatar: this.avatar,
         firstName: this.firstName,
         middleName: this.middleName,
         lastName: this.lastName,
@@ -726,6 +729,22 @@ export default {
     this.minDate = now.toISOString().substring(0, 10)
   },
   methods: {
+    previewImage(e) {
+      if (e.target.files[0]) {
+        const imgPrev = e.target.files[0];
+        if (imgPrev.size > 204800) {
+          this.$toast.info('You can not upload an img of more than 200kb');
+          this.$refs.imgUploadInputRef.value = null;
+        } else {
+          this.avatar = URL.createObjectURL(e.target.files[0]);
+       
+        }
+      } else {
+        this.avatar = null;
+        // clear input reference from field
+        this.$refs.imgUploadInputRef.value = null;
+      }
+    },
     addEducationItems() {
       this.educationItems.push({
         edu_school: '',

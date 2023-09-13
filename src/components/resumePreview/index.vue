@@ -8,9 +8,12 @@
         <section class="home" id="home">
           <div class="home__container section bd-grid">
             <div class="home__data bd-grid">
-              <img src="/src/assets/img/chilling.jpeg" alt="" class="home__img" />
+              <img v-if="userData.avatar" :src="userData.avatar" alt="profile-img" class="home__img" />
+              <img v-else src="/src/assets/img/default-profile-image.png" alt="profile-img" class="home__img" />
               <h1 class="home__title">{{ fullName.trim() ? fullName : 'John Doe' }}</h1>
-              <h3 class="home__profession">Game Developer</h3>
+              <h3 class="home__profession">
+                {{ userData.designation ? userData.designation : 'Game Developer' }}
+              </h3>
               <div>
                 <a download="" class="home__button-movil" @click="downloadResume">Download</a>
               </div>
@@ -48,15 +51,21 @@
           <div class="social__container bd-grid">
             <a href="https://www.linkedin.com/" target="_blank" class="social__link">
               <i class="bx bxl-linkedin-square social__icon"></i>
-              <span style="white-space: normal;word-break: break-word;">{{userData.linkedin ? userData.linkedin: 'https://www.linkedin.com/username/'}}</span>
+              <span style="white-space: normal; word-break: break-word">{{
+                userData.linkedin ? userData.linkedin : 'https://www.linkedin.com/username/'
+              }}</span>
             </a>
             <a href="https://github.com/" target="_blank" class="social__link">
               <i class="bx bxl-github social__icon"></i>
-              <span style="white-space: normal;word-break: break-word;">{{userData.github ? userData.github :'https://github.com/username/'}}</span>
+              <span style="white-space: normal; word-break: break-word">{{
+                userData.github ? userData.github : 'https://github.com/username/'
+              }}</span>
             </a>
             <a href="https://twitter.com/" target="_blank" class="social__link">
-              <i class='bx bx-at social__icon'></i>
-              <span style="white-space: normal;word-break: break-word;">{{userData.website ? userData.website :'https://mywebsite.com'}}</span>
+              <i class="bx bx-at social__icon"></i>
+              <span style="white-space: normal; word-break: break-word">{{
+                userData.website ? userData.website : 'https://mywebsite.com'
+              }}</span>
             </a>
           </div>
         </section>
@@ -69,45 +78,42 @@
             technical and higher studies at large universities. I have several years of experience
             and achievements in the labor field.
           </p>
-          <p v-else>{{userData.summary}}</p>
+          <p v-else>{{ userData.summary }}</p>
         </section>
 
         <!--========== EDUCATION ==========-->
         <section class="education section" id="education">
           <h2 class="section-title">Education</h2>
           <div class="education__container bd-grid">
-            <div class="education__content">
+            <div
+              v-for="(item, index) in userData.educationItems"
+              :key="index"
+              class="education__content"
+            >
               <div class="education__time">
                 <span class="education__rounder"></span>
-                <span class="education__line"></span>
+                <span
+                  v-if="userData.educationItems.length - 1 !== index"
+                  class="education__line"
+                ></span>
               </div>
               <div class="education__data bd-grid">
-                <h3 class="education__title">MASTER OF DESIGN</h3>
-                <span class="education__studies">University of Studies</span>
-                <span class="education__year">2010 - 2015</span>
-              </div>
-            </div>
-
-            <div class="education__content">
-              <div class="education__time">
-                <span class="education__rounder"></span>
-                <span class="education__line"></span>
-              </div>
-              <div class="education__data bd-grid">
-                <h3 class="education__title">MASTER OF GAMES</h3>
-                <span class="education__studies">University of Studies</span>
-                <span class="education__year">2016 - 2018</span>
-              </div>
-            </div>
-
-            <div class="education__content">
-              <div class="education__time">
-                <span class="education__rounder"></span>
-              </div>
-              <div class="education__data bd-grid">
-                <h3 class="education__title">MASTER OF DESIGN</h3>
-                <span class="education__studies">University of Studies</span>
-                <span class="education__year">2019 - 2022</span>
+                <h3 class="education__title">{{ item.edu_school }}</h3>
+                <p class="education__studies">
+                  {{
+                    item.edu_degree
+                      ? `${item.edu_degree}, ${item.edu_description}`
+                      : 'MASTER OF DESIGN'
+                  }}
+                </p>
+                <span class="education__studies">{{
+                  item.edu_city ? item.edu_city : 'University of Studies'
+                }}</span>
+                <span class="education__year">{{
+                  item.edu_start_date
+                    ? formatString(item.edu_start_date, item.edu_graduation_date)
+                    : '2010 - 2015'
+                }}</span>
               </div>
             </div>
           </div>
@@ -117,17 +123,10 @@
           <h2 class="section-title">Skills</h2>
 
           <div class="skills__content bd-grid">
-            <ul class="skills__data">
-              <li class="skills__name"><span class="skills__circle"></span> HTML 5</li>
-              <li class="skills__name"><span class="skills__circle"></span> CSS 3</li>
-              <li class="skills__name"><span class="skills__circle"></span> Javascript</li>
-              <li class="skills__name"><span class="skills__circle"></span> Typescript</li>
-            </ul>
-
-            <ul class="skills__data">
-              <li class="skills__name"><span class="skills__circle"></span> Vue</li>
-              <li class="skills__name"><span class="skills__circle"></span> Nuxt</li>
-              <li class="skills__name"><span class="skills__circle"></span> Mapbox gl</li>
+            <ul v-for="(item, index) in userData.skills" :key="index" class="skills__data">
+              <li class="skills__name">
+                <span class="skills__circle"></span>{{ item.skill ? item.skill : 'HTML 5' }}
+              </li>
             </ul>
           </div>
         </section>
@@ -330,6 +329,9 @@ export default {
     window.removeEventListener('scroll', this.scrollActive)
   },
   methods: {
+    formatString(start, end) {
+      return start.split('-')[0] + ' - ' + end.split('-')[0]
+    },
     scrollActive() {
       const scrollY = window.pageYOffset
       const sections = document.querySelectorAll('section[id]')
@@ -342,11 +344,11 @@ export default {
         if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
           document
             .querySelector('.nav__menu a[href*=' + sectionId + ']')
-            .classList.add('active-link')
+            ?.classList.add('active-link')
         } else {
           document
             .querySelector('.nav__menu a[href*=' + sectionId + ']')
-            .classList.remove('active-link')
+            ?.classList.remove('active-link')
         }
       })
     },
