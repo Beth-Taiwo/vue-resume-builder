@@ -68,7 +68,7 @@
                   <div class="form-elem">
                     <label for="" class="form-label">Your Image</label>
                     <input
-                    ref="imgUploadInputRef"
+                      ref="imgUploadInputRef"
                       name="image"
                       type="file"
                       class="form-control image"
@@ -281,7 +281,7 @@
 
             <div class="cv-form-blk">
               <div class="cv-form-row-title">
-                <h3>achievements</h3>
+                <h3>certificates</h3>
               </div>
 
               <div class="row-separator repeater">
@@ -548,85 +548,8 @@
         </div>
         <!-- resume preview -->
         <div class="cv-form-blk">
-          <PreviewResume />
-        </div>
-      </div>
-    </section>
-
-    <section id="preview-sc" class="print_area">
-      <div class="container">
-        <div class="preview-cnt">
-          <div class="preview-cnt-l bg-green text-white">
-            <div class="preview-blk">
-              <!-- <div class = "preview-image">
-                                <img src = "" alt = "" id = "image_dsp"> 
-                            </div> -->
-              <div class="preview-item preview-item-name">
-                <span class="preview-item-val fw-6" id="fullname_dsp"></span>
-              </div>
-              <div class="preview-item">
-                <span class="preview-item-val text-uppercase fw-6 ls-1" id="designation_dsp"></span>
-              </div>
-            </div>
-
-            <div class="preview-blk">
-              <div class="preview-blk-title">
-                <h3>about</h3>
-              </div>
-              <div class="preview-blk-list">
-                <div class="preview-item">
-                  <span class="preview-item-val" id="phoneno_dsp"></span>
-                </div>
-                <div class="preview-item">
-                  <span class="preview-item-val" id="email_dsp"></span>
-                </div>
-                <div class="preview-item">
-                  <span class="preview-item-val" id="address_dsp"></span>
-                </div>
-                <div class="preview-item">
-                  <span class="preview-item-val" id="summary_dsp"></span>
-                </div>
-              </div>
-            </div>
-
-            <div class="preview-blk">
-              <div class="preview-blk-title">
-                <h3>skills</h3>
-              </div>
-              <div class="skills-items preview-blk-list" id="skills_dsp">
-                <!-- skills list here -->
-              </div>
-            </div>
-          </div>
-
-          <div class="preview-cnt-r bg-white">
-            <div class="preview-blk">
-              <div class="preview-blk-title">
-                <h3>Achievements</h3>
-              </div>
-              <div class="achievements-items preview-blk-list" id="achievements_dsp"></div>
-            </div>
-
-            <div class="preview-blk">
-              <div class="preview-blk-title">
-                <h3>educations</h3>
-              </div>
-              <div class="educations-items preview-blk-list" id="educations_dsp"></div>
-            </div>
-
-            <div class="preview-blk">
-              <div class="preview-blk-title">
-                <h3>experiences</h3>
-              </div>
-              <div class="experiences-items preview-blk-list" id="experiences_dsp"></div>
-            </div>
-
-            <div class="preview-blk">
-              <div class="preview-blk-title">
-                <h3>projects</h3>
-              </div>
-              <div class="projects-items preview-blk-list" id="projects_dsp"></div>
-            </div>
+          <div class="sticky-container">
+            <PreviewResume />
           </div>
         </div>
       </div>
@@ -661,7 +584,7 @@ export default {
   },
   data() {
     return {
-      avatar:null,
+      avatar: null,
       firstName: '',
       middleName: '',
       lastName: '',
@@ -731,18 +654,16 @@ export default {
   methods: {
     previewImage(e) {
       if (e.target.files[0]) {
-        const imgPrev = e.target.files[0];
+        const imgPrev = e.target.files[0]
         if (imgPrev.size > 204800) {
-          this.$toast.info('You can not upload an img of more than 200kb');
-          this.$refs.imgUploadInputRef.value = null;
+          this.$refs.imgUploadInputRef.value = null
         } else {
-          this.avatar = URL.createObjectURL(e.target.files[0]);
-       
+          this.avatar = URL.createObjectURL(e.target.files[0])
         }
       } else {
-        this.avatar = null;
+        this.avatar = null
         // clear input reference from field
-        this.$refs.imgUploadInputRef.value = null;
+        this.$refs.imgUploadInputRef.value = null
       }
     },
     addEducationItems() {

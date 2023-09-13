@@ -7,9 +7,19 @@
         <!--========== HOME ==========-->
         <section class="home" id="home">
           <div class="home__container section bd-grid">
-            <div class="home__data bd-grid">
-              <img v-if="userData.avatar" :src="userData.avatar" alt="profile-img" class="home__img" />
-              <img v-else src="/src/assets/img/default-profile-image.png" alt="profile-img" class="home__img" />
+            <div class="home__data bd-grid" style="border: 1px solid red">
+              <img
+                v-if="userData.avatar"
+                :src="userData.avatar"
+                alt="profile-img"
+                class="home__img"
+              />
+              <img
+                v-else
+                src="/src/assets/img/default-profile-image.png"
+                alt="profile-img"
+                class="home__img"
+              />
               <h1 class="home__title">{{ fullName.trim() ? fullName : 'John Doe' }}</h1>
               <h3 class="home__profession">
                 {{ userData.designation ? userData.designation : 'Game Developer' }}
@@ -35,9 +45,10 @@
             </div>
           </div>
           <!-- Theme change button -->
-          <ThemeButton />
+          <ThemeButton v-if="$route.name !== 'home'" />
           <!-- Button to generate and download the pdf. Available for desktop. -->
           <i
+            v-if="$route.name !== 'home'"
             class="bx bx-download generate-pdf"
             title="Generate PDF"
             id="resume-button"
@@ -118,6 +129,7 @@
             </div>
           </div>
         </section>
+
         <!--========== SKILLS  ==========-->
         <section class="skills section" id="skills">
           <h2 class="section-title">Skills</h2>
@@ -138,56 +150,39 @@
           <h2 class="section-title">Experience</h2>
 
           <div class="experience__container bd-grid">
-            <div class="experience__content">
+            <div
+              v-for="(item, index) in userData.experiences"
+              :key="index"
+              class="experience__content"
+            >
               <div class="experience__time">
                 <span class="experience__rounder"></span>
-                <span class="experience__line"></span>
+                <span
+                  v-if="index < userData.experiences.length - 1"
+                  class="experience__line"
+                ></span>
               </div>
 
               <div class="experience__data bd-grid">
-                <h3 class="experience__title">MASTER OF DESIGN</h3>
+                <h3 class="experience__title">
+                  {{ item.exp_title ? item.exp_title : 'MASTER OF GAMES' }}
+                </h3>
                 <span class="experience__company"
-                  >From 2013 to 2015 | Accra Institute of Technology</span
+                  >{{
+                    item.exp_start_date
+                      ? formatString(item.exp_start_date, item.exp_end_date)
+                      : 'From 2013 to 2015 | Bullet Echo'
+                  }}
+                  {{ item.exp_organization ? `| ${item.exp_organization}` : '' }}</span
                 >
                 <p class="experience__description">
-                  Work in this company dedicating the best responsibility in the area that
+                  {{
+                    item.exp_description
+                      ? item.exp_description
+                      : `Work in this company dedicating the best responsibility in the area that
                   corresponds, delivering the best results for the company and improving
-                  productivity.
-                </p>
-              </div>
-            </div>
-
-            <div class="experience__content">
-              <div class="experience__time">
-                <span class="experience__rounder"></span>
-                <span class="experience__line"></span>
-              </div>
-
-              <div class="experience__data bd-grid">
-                <h3 class="experience__title">MASTER OF GAMES</h3>
-                <span class="experience__company">From 2013 to 2015 | Bullet Echo</span>
-                <p class="experience__description">
-                  Work in this company dedicating the best responsibility in the area that
-                  corresponds, delivering the best results for the company and improving
-                  productivity.
-                </p>
-              </div>
-            </div>
-
-            <div class="experience__content">
-              <div class="experience__time">
-                <span class="experience__rounder"></span>
-              </div>
-
-              <div class="experience__data bd-grid">
-                <h3 class="experience__title">WEB DEVELOPMENT</h3>
-                <span class="experience__company"
-                  >From 2013 to 2015 | Accra Institute of Technology</span
-                >
-                <p class="experience__description">
-                  Work in this company dedicating the best responsibility in the area that
-                  corresponds, delivering the best results for the company and improving
-                  productivity.
+                  productivity.`
+                  }}
                 </p>
               </div>
             </div>
@@ -227,30 +222,6 @@
           </div>
         </section>
 
-        <!--========== REFERENCES ==========-->
-        <section class="references section" id="references">
-          <h2 class="section-title">References</h2>
-
-          <div class="references__container bd-grid">
-            <div class="references__content bd-grid">
-              <span class="references__subtitle">Sr. Director</span>
-              <h3 class="references__title">Dr. John Doe</h3>
-              <ul class="references__contact">
-                <li>Phone: 999-777-666</li>
-                <li>Email: user@email.com</li>
-              </ul>
-            </div>
-
-            <div class="references__content bd-grid">
-              <span class="references__subtitle">Mag. Developer</span>
-              <h3 class="references__title">Mr Choongsaeng Douf</h3>
-              <ul class="references__contact">
-                <li>Phone: 999-777-555</li>
-                <li>Email: user@email.com</li>
-              </ul>
-            </div>
-          </div>
-        </section>
 
         <!--========== LANGUAGES ==========-->
         <section class="languages section">
