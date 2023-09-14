@@ -45,10 +45,10 @@
             </div>
           </div>
           <!-- Theme change button -->
-          <ThemeButton v-if="$route.name !== 'home'" />
+          <ThemeButton v-if="showActionBtn" />
           <!-- Button to generate and download the pdf. Available for desktop. -->
           <i
-            v-if="$route.name !== 'home'"
+            v-if="showActionBtn"
             class="bx bx-download generate-pdf"
             title="Generate PDF"
             id="resume-button"
@@ -172,7 +172,6 @@
                   }}
                 </p>
               </div>
-             
             </div>
           </div>
         </section>
@@ -214,12 +213,7 @@
           <h2 class="section-title">Projects</h2>
 
           <div class="project__container bd-grid">
-            <div
-              v-if="
-                !userData.projects[0].proj_title
-              "
-              class="project__content"
-            >
+            <div v-if="!userData.projects[0].proj_title" class="project__content">
               <h3 class="project__title">Automated car parking system</h3>
               <p class="project__description">
                 For meeting the expectations of leading the team to work the specified tasks in the
@@ -227,17 +221,13 @@
               </p>
             </div>
 
-            <div
-              v-for="(item, index) in userData.projects"
-              :key="index"
-              class="project__content"
-            >
+            <div v-for="(item, index) in userData.projects" :key="index" class="project__content">
               <h3 class="project__title">{{ item.proj_title }}</h3>
               <p>
                 {{ item.proj_description }}
               </p>
               <p class="project__description">
-                <a href="item.proj_link" class="social__link">{{item.proj_link}}</a>
+                <a href="item.proj_link" class="social__link">{{ item.proj_link }}</a>
               </p>
             </div>
           </div>
@@ -289,6 +279,12 @@ export default {
   name: 'ResumePreview',
   components: { HeaderComponent, ThemeButton },
   inject: ['userData'],
+  props: {
+    showActionBtn: {
+      type: Boolean,
+      default: true
+    }
+  },
   data() {
     return {
       showScrollTopBtn: false
