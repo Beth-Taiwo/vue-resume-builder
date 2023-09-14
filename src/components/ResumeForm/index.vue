@@ -6,19 +6,34 @@
           <div class="brand-and-toggler">
             <a href="index.html" class="navbar-brand">
               <img src="/src/assets/img/curriculum-vitae.png" alt="" class="navbar-brand-icon" />
-              <span class="navbar-brand-text">build <span>resume.</span></span>
+              <span v-if="showFormPreview" class="navbar-brand-text"
+                >build <span>resume.</span></span
+              >
+              <span v-else class="navbar-brand-text">preview <span>resume.</span></span>
             </a>
           </div>
         </div>
       </div>
       <div>
-        <button class="preview-icon">
+        <button
+          v-if="showFormPreview"
+          title="open full view"
+          class="preview-icon"
+          @click="previewResume"
+        >
           <img src="/src/assets/img/icons8-eye.png" alt="eye_image" class="navbar-brand-icon" />
+        </button>
+        <button v-else title="hide full view" class="preview-icon" @click="previewResume">
+          <img
+            src="/src/assets/img/icons8-hide.png"
+            alt="eye_image_alt"
+            class="navbar-brand-icon"
+          />
         </button>
       </div>
     </nav>
 
-    <section id="about-sc" class="">
+    <section v-if="showFormPreview" id="about-sc">
       <div class="container">
         <!-- form -->
         <div class="build-resume">
@@ -554,11 +569,14 @@
         <!-- resume preview -->
         <div class="cv-form-blk">
           <div class="sticky-container sticky-resume">
-            <PreviewResume />
+            <PreviewResume :showActionBtn="false" />
           </div>
         </div>
       </div>
     </section>
+    <div v-else class="cv-form-blk">
+      <PreviewResume />
+    </div>
   </div>
 </template>
 
@@ -576,6 +594,7 @@ export default {
   },
   data() {
     return {
+      showFormPreview: true,
       avatar: null,
       firstName: '',
       middleName: '',
@@ -700,6 +719,10 @@ export default {
     },
     removeSkillItem(index) {
       this.skills.splice(index, 1)
+    },
+    previewResume() {
+      this.showFormPreview = !this.showFormPreview
+      if (this.showFormPreview) localStorage.setItem('selected-theme', 'light')
     }
   }
 }
